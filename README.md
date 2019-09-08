@@ -14,7 +14,6 @@ a website used for sharing some kinds of knowledge( **office skills** / **game v
     *   it uses **`sequelize`** as ORM
 *   about front-end side
     *   due to the usage of **`nextjs`** , it uses **`react@~16.9.0`**
-    *   it uses **`react-redux@~5.0.7`**
     *   it uses **`bootstrap@~4.3.1`** and **`react-bootstrap@^1.0.0-beta.12`** as UI framework
 *   about static assets
     *   mainly point to the files located in **`${projectDir}/.next/static`**

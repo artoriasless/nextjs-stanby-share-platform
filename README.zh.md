@@ -14,7 +14,6 @@
     *   使用 **`sequelize`** 作为 ORM
 *   关于前端
     *   由于使用了 **`nextjs`** ，本项目同时将使用 **`react@~16.9.0`**
-    *   使用 **`react-redux@~5.0.7`**
     *   使用 **`bootstrap@~4.3.1`** 和 **`react-bootstrap@^1.0.0-beta.12`** 作为 UI 框架
 *   关于静态资源
     *   主要指位于 **`${projectDir}/.next/static`** 的所有资源文件
