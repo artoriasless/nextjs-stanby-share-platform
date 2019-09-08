@@ -1,0 +1,16 @@
+{
+	"restartable": "rs",
+	"ignore": [
+		"node_modules"
+	],
+	"verbose": true,
+	"execMap": {},
+	"watch": [
+		"config",
+		"model",
+		"service",
+		"web"
+	],
+	"env": {},
+	"ext": "js json"
+}

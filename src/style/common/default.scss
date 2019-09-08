@@ -1,0 +1,18 @@
+@import '~style/common/variables.scss';
+
+@import '~style/common/font-style.scss';
+
+@import '~bootstrap/scss/bootstrap.scss';
+
+hr {
+    height: 1px;
+    padding: 0;
+    margin: 5px 0;
+    line-height: 1px;
+    background: transparent url('/static/img/hr.png') 33% 0 no-repeat;
+    border: none;
+}
+
+.hidden {
+    display: none;
+}
