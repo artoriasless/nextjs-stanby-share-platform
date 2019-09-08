@@ -1,0 +1,23 @@
+{
+    "name": "stanby-share-platform",
+    "version": "1.0.0",
+    "description": "a website used for sharing based on nextjs",
+    "author": "StanLee",
+    "license": "MIT",
+    "keywords": [
+        "nextjs",
+        "react",
+        "redux",
+        "koa2",
+        "mysql",
+        "sequelize"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MonkingStand/nextjs-stanby-share-platform.git"
+    },
+    "bugs": {
+        "url": "https://github.com/MonkingStand/nextjs-stanby-share-platform/issues"
+    },
+    "homepage": "https://github.com/MonkingStand/nextjs-stanby-share-platform#readme"
+}
