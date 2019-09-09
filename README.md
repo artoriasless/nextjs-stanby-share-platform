@@ -3,11 +3,13 @@ a website used for sharing some kinds of knowledge( **office skills** / **game v
 
 > website( coming soon ) : **[share.stanby.cn](http://share.stanby.cn)**
 
-## brief
+## Brief
 *   it uses **`node@^8.11.0`** and **`npm@^5.6.0`** as development and production runtime environment
 *   it uses **`next@~9.0.4`** as whole project framework for **isomorphism**
-*   about isomorphism framework
+*   about scaffold
     *   it uses **`@zeit/next-css`** and **`@zeit/next-sass`** to import **`*.css/*.sass/*.scss`** to compile and bundle
+    *   for local development, is uses **`nodemon@~1.19.2`** to watch configuration files(**config/\*** ) and server-side files( **model/\*** / **service/\*** / **web/\*** ) changed, and restart after file(s) changed
+    *   it uses **`forever-monitor@~1.7.1`** to run **`nextjs`** project in child process to avoid the application shut down when it occurs unexpected error(s)
 *   about server side
     *   it uses **`koa@~2.8.1`** as custom server to replace default server in **`nextjs`**
     *   it uses **`mysql`** as database
