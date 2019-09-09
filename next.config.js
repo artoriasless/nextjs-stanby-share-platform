@@ -4,10 +4,14 @@ const withCSS = require('@zeit/next-css');
 
 const envConfig = require('./config');
 
+const compress = !envConfig.dev;
 const useFileSystemPublicRoutes = false;
 const assetPrefix = envConfig.dev ? '' : envConfig.ossPublic.assetPrefix;
 const cssLoaderOptions = {
     url: false,
+};
+const sassLoaderOptions = {
+    data: `$assetPrefix: "${assetPrefix}";`
 };
 const webpack = function(config, options) {
     config.resolve = config.resolve || {};
@@ -23,8 +27,10 @@ const webpack = function(config, options) {
 };
 
 module.exports = withCSS(withSass({
+    compress,
     useFileSystemPublicRoutes,
     assetPrefix,
     cssLoaderOptions,
+    sassLoaderOptions,
     webpack,
 }));

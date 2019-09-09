@@ -9,7 +9,7 @@ hr {
     padding: 0;
     margin: 5px 0;
     line-height: 1px;
-    background: transparent url('/static/img/hr.png') 33% 0 no-repeat;
+    background: transparent url('#{$assetPrefix}/static/img/hr.png') 33% 0 no-repeat;
     border: none;
 }
 
