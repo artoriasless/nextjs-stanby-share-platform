@@ -6,6 +6,7 @@
     "license": "MIT",
     "scripts": {
         "build": "next build",
+        "publish": "node oss-publish.js",
         "dev": "NODE_ENV=development nodemon node forever.js",
         "start": "NODE_ENV=production node forever.js"
     },
@@ -38,6 +39,7 @@
         "moment": "~2.24.0",
         "mysql": "~2.17.1",
         "next": "~9.0.5",
+        "node-sass": "~4.12.0",
         "nodemailer": "~6.3.0",
         "nodemon": "~1.19.2",
         "object-hash": "~1.3.1",
@@ -52,7 +54,7 @@
         "eslint-plugin-react": "~7.14.3",
         "eslint-plugin-react-hooks": "~2.0.1",
         "mocha": "~6.2.0",
-        "node-sass": "~4.12.0",
+        "readline": "^1.3.0",
         "should": "~13.2.3"
     },
     "repository": {

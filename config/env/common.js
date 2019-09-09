@@ -1,14 +1,13 @@
 'use stirct';
 
-const path = require('path');
-
 const pkg = require('../../package.json');
 
 const staticFolder = 'share-platform';
 const staticVersion = pkg.version;
 const domain = '//monkingstand.oss-cn-beijing.aliyuncs.com';
+const assetFolder = `${staticFolder}/${staticVersion}`;
+const userPrefix = `${domain}/user`;
 const assetPrefix = `${domain}/${staticFolder}/${staticVersion}`;
-const userPrefix = `${domain}/${staticFolder}/user`;;
 const paperPrefix = `${domain}/${staticFolder}/paper`;;
 
 module.exports = {
@@ -27,8 +26,9 @@ module.exports = {
     },
     ossPublic: {
         domain,
-        assetPrefix,
+        assetFolder,
         userPrefix,
+        assetPrefix,
         paperPrefix,
         staticFolder,
         staticVersion,
