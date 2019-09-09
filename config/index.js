@@ -3,11 +3,20 @@
 const _ = require('lodash');
 
 const commonConfig = require('./env/common');
-const mailOpts = require('./email-config');
-const ossOpts = require('./oss-config');
-const dbOpts = require('./db-connect');
-
+let mailOpts;
+let ossOpts;
+let dbOpts;
 let envConfig;
+
+try {
+    mailOpts = require('./email-config');
+    ossOpts = require('./oss-config');
+    dbOpts = require('./db-connect');
+} catch(err) {
+    mailOpts = {};
+    ossOpts = {};
+    dbOpts = {};
+}
 
 if (commonConfig.dev) {
     envConfig = require('./env/development');
