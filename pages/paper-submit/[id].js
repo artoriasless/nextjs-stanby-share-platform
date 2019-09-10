@@ -23,6 +23,16 @@ const Editor = function(props) {
         };
         const editorConfig = {
             readonly: false,
+            controls: {
+                font: {
+                    list: {
+                        'brush script mt': 'Brush Script MT',
+                        'consola': 'Consolas',
+                        'microsoft yahei': 'MicroSoft Yahei',
+                        'snell roundhand script': 'Snell Roundhand Script',
+                    },
+                },
+            },
             buttons: [
                 'font', 'fontsize', 'brush', 'paragraph', 'align',
                 '|',
@@ -61,7 +71,7 @@ const Editor = function(props) {
                         console.info('save');
                     }
                 },
-            ]
+            ],
         };
         const $editorRef = typeof window === 'undefined' ? null : window.jodit;
 
@@ -76,7 +86,6 @@ const Editor = function(props) {
     }
 };
 const PaperEdit = withRouter(function(props) {
-    const [intervalVal, setIntervalVal] = useState(0);
     const assetPrefix = config.dev ? '' : config.ossPublic.assetPrefix;
     const { query } = props.router || {};
     const {
@@ -93,7 +102,7 @@ const PaperEdit = withRouter(function(props) {
         setTimeout(() => {
             clearInterval(intervalTask);
         }, 10000);
-    }, [intervalVal]);
+    }, []);
 
     return (
         <>
@@ -107,7 +116,7 @@ const PaperEdit = withRouter(function(props) {
                 <div>
                     <h2>paper id : { id }</h2>
                     <div style={{ margin: '20px 100px' }}>
-                        <Editor interval={ intervalVal }/>
+                        <Editor/>
                     </div>
                 </div>
             </Layout>
