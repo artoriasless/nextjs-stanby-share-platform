@@ -23,7 +23,7 @@ const color = {
 };
 const print = function() {
     if (arguments) {
-        console.info(...arguments);
+        console.info(...arguments); // eslint-disable-line
     }
 };
 const userConfirm = function(info) {
@@ -76,7 +76,7 @@ const uploadHandle = async function(localDir, originDir) {
                 resolve(yield client.put(name, data));
             }).catch(function(error) {
                 print();
-                print(color.error, err, color.reset);
+                print(color.error, error, color.reset);
                 reject(error);
             });
         });

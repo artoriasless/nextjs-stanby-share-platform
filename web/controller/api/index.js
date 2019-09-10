@@ -12,7 +12,7 @@ const apiList = [
     ['/api/test', cors, POST, async ctx => { ctx.body = {test: 'test POST'}; }],
 ];
 
-const api = (router, app) => {
+const api = (router, app) => { // eslint-disable-line
     // used for api request
     apiList.forEach(apiItem => {
         if (apiItem[1]) {

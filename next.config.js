@@ -13,7 +13,7 @@ const cssLoaderOptions = {
 const sassLoaderOptions = {
     data: `$assetPrefix: "${assetPrefix}";`
 };
-const webpack = function(config, options) {
+const webpack = function(config, options) { // eslint-disable-line
     config.resolve = config.resolve || {};
     config.resolve.alias = Object.assign({}, config.resolve.alias || {}, {
         'components': path.resolve(__dirname, 'src/components'),

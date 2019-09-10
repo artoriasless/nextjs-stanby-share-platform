@@ -8,7 +8,7 @@ const domain = '//monkingstand.oss-cn-beijing.aliyuncs.com';
 const assetFolder = `${staticFolder}/${staticVersion}`;
 const userPrefix = `${domain}/user`;
 const assetPrefix = `${domain}/${staticFolder}/${staticVersion}`;
-const paperPrefix = `${domain}/${staticFolder}/paper`;;
+const paperPrefix = `${domain}/${staticFolder}/paper`;
 
 module.exports = {
     dev: process.env.NODE_ENV !== 'production',

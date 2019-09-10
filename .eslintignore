@@ -1,2 +1,5 @@
 .next/*
+pages/
+src/
+static/
 node_modules/*

@@ -27,11 +27,11 @@ const child = new(forever.Monitor)('./web/server.js', {
 });
 
 child.on('start', () => {
-    console.info(`app has started,address: ${config.domain}`);
+    console.info(`app has started,address: ${config.domain}`); // eslint-disable-line
 });
 
 child.on('exit', () => {
-    console.info(`app has exited after ${max} restart(s)`);
+    console.info(`app has exited after ${max} restart(s)`); // eslint-disable-line
 });
 
 child.start();
