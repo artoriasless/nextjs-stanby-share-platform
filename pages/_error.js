@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
 import PropTypes from 'prop-types';
+import fetch from 'isomorphic-unfetch';
 
 import config from 'config';
 import {
@@ -13,7 +13,10 @@ const errMsgMap = {
     '5': 'ERROR IN SERVER',
 };
 const Error = function(props) {
-    const { statusCode } = props;
+    const {
+        seo,
+        statusCode,
+    } = props;
     const [count, setCount] = useState(5);
     const errMsg = `${statusCode} — ${errMsgMap[String(statusCode).charAt(0)] || 'UNKNOWN ERROR'}`;
     const msgContent = 'There\'s something wrong happened, please check the url is right, or try to refresh the page later...';
@@ -33,10 +36,7 @@ const Error = function(props) {
 
     return (
         <>
-            <Head>
-                <title>{ errMsg }</title>
-            </Head>
-            <Layout>
+            <Layout seo={ seo }>
                 <div id="errContainer">
                     <div className="err-content">
                         <div className="err-title">
@@ -67,6 +67,7 @@ const Error = function(props) {
                     position: absolute;
                     left: 50%;
                     top: 50%;
+                    padding: 0 10px;
                     -webkit-transform: translate(-50%, -50%);
                     -ms-transform: translate(-50%, -50%);
                     transform: translate(-50%, -50%);
@@ -135,7 +136,6 @@ const Error = function(props) {
                     box-shadow: 0px 4px 15px -5px #0046d5;
                 }
 
-
                 @media only screen and (max-width: 767px) {
                     .err-content .err-title {
                         height: 142px;
@@ -152,13 +152,25 @@ const Error = function(props) {
 };
 
 Error.propTypes = {
+    seo: PropTypes.object,
     statusCode: PropTypes.number,
 };
-Error.getInitialProps = serverRes => {
-    const { res, err } = serverRes;
+Error.getInitialProps = async ctx => {
+    const {
+        res,
+        err,
+    } = ctx;
     const statusCode = res ? res.statusCode : err ? err.statusCode : 0;
 
-    return { statusCode };
+    const seoRes = await fetch(`${config.domain}/api/util/seo?page=error&statusCode=${statusCode}`);
+    const seoResult = await seoRes.json();
+
+    const initProps = {
+        seo: seoResult.data,
+        statusCode,
+    };
+
+    return initProps;
 };
 
 export default Error;

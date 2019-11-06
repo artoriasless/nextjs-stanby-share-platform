@@ -4,35 +4,41 @@ const koaCors = require('koa2-cors');
 
 const config = require('../../../config');
 
+const util = require('./util');
+
 const GET = 'GET';
 const POST = 'POST';
 const cors = config.dev;
-const apiList = [
-    ['/api/test', cors, GET, async ctx => { ctx.body = {test: 'test GET'}; }],
-    ['/api/test', cors, POST, async ctx => { ctx.body = {test: 'test POST'}; }],
+const confiList = [
+    // routerUrl, isCors, type, controllerFunc
+    ['/api/util/seo', cors, GET, util.seo],
 ];
 
 const api = (router, app) => { // eslint-disable-line
     // used for api request
-    apiList.forEach(apiItem => {
-        if (apiItem[1]) {
-            switch(apiItem[2]) {
+    confiList.forEach(confItem => {
+        const [
+            routerUrl, isCors, type, controllerFunc,
+        ] = confItem;
+
+        if (isCors) {
+            switch(type) {
             case GET:
-                router.get(apiItem[0], koaCors(), apiItem[3]);
+                router.get(routerUrl, koaCors(), controllerFunc);
                 break;
             case POST:
-                router.post(apiItem[0], koaCors(), apiItem[3]);
+                router.post(routerUrl, koaCors(), controllerFunc);
                 break;
             default:
                 // do nothing
             }
         } else {
-            switch(apiItem[2]) {
+            switch(type) {
             case GET:
-                router.get(apiItem[0], apiItem[3]);
+                router.get(routerUrl, controllerFunc);
                 break;
             case POST:
-                router.post(apiItem[0], apiItem[3]);
+                router.post(routerUrl, controllerFunc);
                 break;
             default:
                 // do nothing

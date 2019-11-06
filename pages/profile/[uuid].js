@@ -1,12 +1,16 @@
 import React from 'react';
-import Head from 'next/head';
 import { withRouter } from 'next/router';
+import fetch from 'isomorphic-unfetch';
 
+import config from 'config';
 import {
-    Layout
+    TitleGenerator,
+    HeadGenerator,
+    Layout,
 } from 'components';
 
 const Profile = withRouter(function(props) {
+    const seo = props.seo || {};
     const { query } = props.router || {};
     const {
         uuid = ''
@@ -14,9 +18,8 @@ const Profile = withRouter(function(props) {
 
     return (
         <>
-            <Head>
-                <title>User Center { uuid }</title>
-            </Head>
+            <TitleGenerator title={ seo.title }/>
+            <HeadGenerator seo={ seo }/>
             <Layout>
                 <h1>User Center Page</h1>
                 <div>
@@ -29,5 +32,16 @@ const Profile = withRouter(function(props) {
         </>
     );
 });
+
+Profile.getInitialProps = async () => {
+    const seoRes = await fetch(`${config.domain}/api/util/seo?page=profile`);
+    const seoResult = await seoRes.json();
+    
+    const initProps = {
+        seo: seoResult.data,
+    };
+
+    return initProps;
+};
 
 export default Profile;

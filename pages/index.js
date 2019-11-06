@@ -1,21 +1,26 @@
 import React from 'react';
 import Link from 'next/link';
-import Head from 'next/head';
+import PropTypes from 'prop-types';
+import fetch from 'isomorphic-unfetch';
 
 import {
     Alert,
 } from 'react-bootstrap';
 
+import config from 'config';
 import {
-    Layout
+    TitleGenerator,
+    HeadGenerator,
+    Layout,
 } from 'components';
 
-const Home = function() {
+const Home = function(props) {
+    const seo = props.seo || {};
+
     return (
         <>
-            <Head>
-                <title>Home Page</title>
-            </Head>
+            <TitleGenerator title={ seo.title }/>
+            <HeadGenerator seo={ seo }/>
             <Layout>
                 <h1>Home Page</h1>
                 <div>
@@ -49,6 +54,20 @@ const Home = function() {
             </Layout>
         </>
     );
+};
+
+Home.propTypes = {
+    seo: PropTypes.object,
+};
+Home.getInitialProps = async () => {
+    const seoRes = await fetch(`${config.domain}/api/util/seo?page=home`);
+    const seoResult = await seoRes.json();
+    
+    const initProps = {
+        seo: seoResult.data,
+    };
+
+    return initProps;
 };
 
 export default Home;

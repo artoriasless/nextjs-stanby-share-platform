@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
+import React, { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { withRouter } from 'next/router';
+import fetch from 'isomorphic-unfetch';
 
 import config from 'config';
 import {
+    TitleGenerator,
+    HeadGenerator,
     Layout,
 } from 'components';
 
-const Editor = function(props) {
+const Editor = function() {
     // https://xdsoft.net/jodit/
     const JoditEditor = dynamic(() => import('jodit-react'), {
         ssr: false
@@ -19,7 +21,7 @@ const Editor = function(props) {
     } else {
         const paperContent = 'title';
         const changeHandler = val => {
-            console.info('change', val);
+            console.info('change', val); // eslint-disable-line
         };
         const editorConfig = {
             readonly: false,
@@ -60,15 +62,15 @@ const Editor = function(props) {
                 {
                     name: 'upload',
                     icon: 'upload',
-                    exec: function (editor) {
-                        console.info('upload');
+                    exec: function (editor) { // eslint-disable-line
+                        console.info('upload'); // eslint-disable-line
                     }
                 },
                 {
                     name: 'save',
                     icon: 'save',
-                    exec: function (editor) {
-                        console.info('save');
+                    exec: function (editor) { // eslint-disable-line
+                        console.info('save'); // eslint-disable-line
                     }
                 },
             ],
@@ -85,12 +87,13 @@ const Editor = function(props) {
         );
     }
 };
-const PaperEdit = withRouter(function(props) {
-    const assetPrefix = config.dev ? '' : config.ossPublic.assetPrefix;
+const paperSubmit = withRouter(function(props) {
+    const seo = props.seo || {};
     const { query } = props.router || {};
     const {
         id = ''
     } = query || {};
+    const assetPrefix = config.dev ? '' : config.ossPublic.assetPrefix;
 
     useEffect(() => {
         const intervalTask = setInterval(() => {
@@ -106,11 +109,11 @@ const PaperEdit = withRouter(function(props) {
 
     return (
         <>
-            <Head>
-                <title>Paper Edit Page { id }</title>
+            <TitleGenerator title={ seo.title }/>
+            <HeadGenerator seo={ seo }>
                 <link rel="stylesheet" href={ `${assetPrefix}/static/plugins/jodit/index.css` }/>
                 <script src={ `${assetPrefix}/static/plugins/jodit/index.js` }></script>
-            </Head>
+            </HeadGenerator>
             <Layout>
                 <h1>Paper Edit Page</h1>
                 <div>
@@ -124,4 +127,15 @@ const PaperEdit = withRouter(function(props) {
     );
 });
 
-export default PaperEdit;
+paperSubmit.getInitialProps = async () => {
+    const seoRes = await fetch(`${config.domain}/api/util/seo?page=paperSubmit`);
+    const seoResult = await seoRes.json();
+    
+    const initProps = {
+        seo: seoResult.data,
+    };
+
+    return initProps;
+};
+
+export default paperSubmit;

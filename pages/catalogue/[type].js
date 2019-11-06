@@ -1,13 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
-import Head from 'next/head';
 import { withRouter } from 'next/router';
+import fetch from 'isomorphic-unfetch';
 
+import config from 'config';
 import {
-    Layout
+    TitleGenerator,
+    HeadGenerator,
+    Layout,
 } from 'components';
 
 const Catalogue = withRouter(function(props) {
+    const seo = props.seo || {};
     const { query } = props.router || {};
     const {
         type = ''
@@ -21,9 +25,8 @@ const Catalogue = withRouter(function(props) {
 
     return (
         <>
-            <Head>
-                <title>Catalogue Page { type }</title>
-            </Head>
+            <TitleGenerator title={ seo.title }/>
+            <HeadGenerator seo={ seo }/>
             <Layout>
                 <h1>Catalogue Page</h1>
                 <div>
@@ -52,5 +55,16 @@ const Catalogue = withRouter(function(props) {
         </>
     );
 });
+
+Catalogue.getInitialProps = async () => {
+    const seoRes = await fetch(`${config.domain}/api/util/seo?page=catalogue`);
+    const seoResult = await seoRes.json();
+    
+    const initProps = {
+        seo: seoResult.data,
+    };
+
+    return initProps;
+};
 
 export default Catalogue;

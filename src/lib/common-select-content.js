@@ -5,13 +5,15 @@ const selectContent = $element => {
      */
 
     if (window.getSelection) {
-        var sel = window.getSelection();
+        const sel = window.getSelection();
+        const range = document.createRange();
+        
         sel.removeAllRanges();
-        var range = document.createRange();
         range.selectNodeContents($element);
         sel.addRange(range);
     } else if (document.selection) {
-        var textRange = document.body.createTextRange();
+        const textRange = document.body.createTextRange();
+
         textRange.moveToElementText($element);
         textRange.select();
     }

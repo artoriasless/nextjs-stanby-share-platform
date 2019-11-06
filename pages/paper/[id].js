@@ -1,12 +1,16 @@
 import React from 'react';
-import Head from 'next/head';
 import { withRouter } from 'next/router';
+import fetch from 'isomorphic-unfetch';
 
+import config from 'config';
 import {
-    Layout
+    TitleGenerator,
+    HeadGenerator,
+    Layout,
 } from 'components';
 
 const Paper = withRouter(function(props) {
+    const seo = props.seo || {};
     const { query } = props.router || {};
     const {
         id = ''
@@ -14,9 +18,8 @@ const Paper = withRouter(function(props) {
 
     return (
         <>
-            <Head>
-                <title>Paper Page { id }</title>
-            </Head>
+            <TitleGenerator title={ seo.title }/>
+            <HeadGenerator seo={ seo }/>
             <Layout>
                 <h1>Paper Page</h1>
                 <div>
@@ -29,5 +32,16 @@ const Paper = withRouter(function(props) {
         </>
     );
 });
+
+Paper.getInitialProps = async () => {
+    const seoRes = await fetch(`${config.domain}/api/util/seo?page=paper`);
+    const seoResult = await seoRes.json();
+    
+    const initProps = {
+        seo: seoResult.data,
+    };
+
+    return initProps;
+};
 
 export default Paper;
