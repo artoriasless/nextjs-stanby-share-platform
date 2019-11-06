@@ -11,7 +11,7 @@ const cssLoaderOptions = {
     url: false,
 };
 const sassLoaderOptions = {
-    data: `$assetPrefix: "${assetPrefix}";`
+    data: `$assetPrefix: "${assetPrefix}";`,
 };
 const webpack = function(config, options) { // eslint-disable-line
     config.resolve = config.resolve || {};

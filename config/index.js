@@ -3,6 +3,8 @@
 const _ = require('lodash');
 
 const commonConfig = require('./env/common');
+const devConfig = require('./env/development');
+const proConfig = require('./env/production');
 let mailOpts;
 let ossOpts;
 let dbOpts;
@@ -19,9 +21,9 @@ try {
 }
 
 if (commonConfig.dev) {
-    envConfig = require('./env/development');
+    envConfig = devConfig;
 } else {
-    envConfig = require('./env/production');
+    envConfig = proConfig;
     envConfig.db = dbOpts;
 }
 

@@ -9,12 +9,12 @@
 // const colorCyan = '\x1b[36m';
 // const colorWhite = '\x1b[37m';
 
-module.exports = (str, args) => {   //  eslint-disable-line
+module.exports = (str, args) => { // eslint-disable-line
     const dataArr = str.split(/\s+/).slice(1);
     const ignoreReg = /\/_next\//g;
     const colorArr = [
-        /* req/res , method , url , status , time , size */
-        '\x1b[33m', '\x1b[32m', '\x1b[34m', '\x1b[36m', '\x1b[36m', '\x1b[36m'
+        // req/res , method , url , status , time , size
+        '\x1b[33m', '\x1b[32m', '\x1b[34m', '\x1b[36m', '\x1b[36m', '\x1b[36m',
     ];
     const outputArr = [' '];
 
@@ -28,5 +28,5 @@ module.exports = (str, args) => {   //  eslint-disable-line
         }
     }
 
-    console.info(...outputArr);    //  eslint-disable-line
+    console.info(...outputArr); // eslint-disable-line
 };

@@ -13,7 +13,7 @@ const paperPrefix = `${domain}/${staticFolder}/paper`;
 module.exports = {
     dev: process.env.NODE_ENV !== 'production',
     sessionKeys: [
-        'user'
+        'user',
     ],
     session: {
         key: 'koa-share-platform-session',
