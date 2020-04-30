@@ -29,7 +29,7 @@
         "isomorphic-unfetch": "~3.0.0",
         "jodit": "~3.2.55",
         "jodit-react": "~1.0.26",
-        "jquery": "~3.3.1",
+        "jquery": "~3.5.0",
         "koa": "~2.8.1",
         "koa-bodyparser": "~4.2.1",
         "koa-formidable": "~1.1.0",
